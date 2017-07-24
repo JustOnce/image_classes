@@ -14,8 +14,8 @@ class CleanupFileModel(models.Model):
         abstract = True
 
     def _get_file_fields(self):
-        for field, _ in type(self)._meta.get_fields():
-            if issubclass(type(field), models.FileField):
+        for field in type(self)._meta.get_fields():
+            if isinstance(field, models.FileField):
                 yield field
 
     def delete(self, *args, **kwargs):
